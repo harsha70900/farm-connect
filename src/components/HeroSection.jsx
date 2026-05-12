@@ -3,21 +3,26 @@ import '../styles/hero.css'
 function HeroSection() {
   return (
     <section className='hero'>
+
       <div className='container hero-container'>
 
         <div className='hero-content'>
+
           <h1>
             Smart Agricultural Marketplace Platform
           </h1>
 
           <p>
-            Connect farmers directly with buyers using modern technology.
-            Discover fresh products, demand analytics, and local farming communities.
+            Farm-Connect helps farmers and buyers connect directly
+            through a modern digital marketplace platform.
+            Discover fresh products, demand analytics,
+            and local farming communities.
           </p>
 
           <button>
             Explore Products
           </button>
+
         </div>
 
         <div className='hero-image'>
@@ -28,6 +33,7 @@ function HeroSection() {
         </div>
 
       </div>
+
     </section>
   )
 }

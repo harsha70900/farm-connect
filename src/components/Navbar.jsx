@@ -5,7 +5,9 @@ import '../styles/navbar.css'
 function Navbar() {
   return (
     <nav className='navbar'>
+
       <div className='container navbar-container'>
+
         <div className='logo'>
           <FaLeaf className='logo-icon' />
           <h1>Farm-Connect</h1>
@@ -17,7 +19,9 @@ function Navbar() {
           <Link to='/dashboard'>Dashboard</Link>
           <Link to='/login'>Login</Link>
         </div>
+
       </div>
+
     </nav>
   )
 }

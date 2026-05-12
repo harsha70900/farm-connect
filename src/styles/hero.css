@@ -1,7 +1,9 @@
 .hero {
   background: linear-gradient(to right, #0f7c38, #27ae60);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
   color: white;
-  padding: 100px 0;
 }
 
 .hero-container {
@@ -15,13 +17,13 @@
 }
 
 .hero-content h1 {
-  font-size: 58px;
+  font-size: 65px;
   line-height: 1.2;
 }
 
 .hero-content p {
-  margin-top: 25px;
-  font-size: 20px;
+  margin-top: 30px;
+  font-size: 21px;
   line-height: 1.8;
 }
 
@@ -31,13 +33,13 @@
   color: #1b8f3f;
   border: none;
   padding: 16px 35px;
-  font-size: 18px;
   border-radius: 10px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .hero-content button:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
 }
 
 .hero-image {

@@ -3,12 +3,13 @@ import '../styles/footer.css'
 function Footer() {
   return (
     <footer className='footer'>
+
       <div className='container'>
 
-        <h2>Farm-Connect</h2>
+        <h1>Farm-Connect</h1>
 
         <p>
-          Connecting Farmers and Buyers through Technology.
+          Connecting Farmers and Buyers through Technology
         </p>
 
         <small>
@@ -16,6 +17,7 @@ function Footer() {
         </small>
 
       </div>
+
     </footer>
   )
 }

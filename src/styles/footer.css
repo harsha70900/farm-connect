@@ -1,17 +1,18 @@
 .footer {
   background: #111827;
   color: white;
+  padding: 60px 0;
   text-align: center;
-  padding: 50px 0;
 }
 
-.footer h2 {
-  font-size: 34px;
+.footer h1 {
+  font-size: 38px;
 }
 
 .footer p {
-  margin-top: 15px;
+  margin-top: 20px;
   color: #cbd5e1;
+  font-size: 18px;
 }
 
 .footer small {
