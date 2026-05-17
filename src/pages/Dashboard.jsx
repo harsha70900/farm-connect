@@ -1,3 +1,10 @@
+import {
+  FaBox,
+  FaUsers,
+  FaShoppingCart,
+  FaChartLine,
+} from 'react-icons/fa'
+
 import Navbar from '../components/Navbar'
 import '../styles/dashboard.css'
 
@@ -6,26 +13,93 @@ function Dashboard() {
     <>
       <Navbar />
 
-      <div className='container dashboard'>
+      <div className='dashboard-page container'>
 
-        <h1>Dashboard</h1>
+        <div className='dashboard-header'>
+          <h1>Dashboard Analytics</h1>
+
+          <p>
+            Monitor products, buyers, and marketplace insights.
+          </p>
+        </div>
 
         <div className='dashboard-cards'>
 
           <div className='dashboard-card'>
-            <h2>Total Products</h2>
-            <p>120</p>
+            <FaBox className='dashboard-icon' />
+
+            <h2>120</h2>
+
+            <p>Total Products</p>
           </div>
 
           <div className='dashboard-card'>
-            <h2>Farmers</h2>
-            <p>45</p>
+            <FaUsers className='dashboard-icon' />
+
+            <h2>45</h2>
+
+            <p>Farmers</p>
           </div>
 
           <div className='dashboard-card'>
-            <h2>Buyers</h2>
-            <p>88</p>
+            <FaShoppingCart className='dashboard-icon' />
+
+            <h2>88</h2>
+
+            <p>Buyers</p>
           </div>
+
+          <div className='dashboard-card'>
+            <FaChartLine className='dashboard-icon' />
+
+            <h2>95%</h2>
+
+            <p>Growth Rate</p>
+          </div>
+
+        </div>
+
+        <div className='dashboard-table-section'>
+
+          <h2>Recent Products</h2>
+
+          <table className='dashboard-table'>
+
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Tomatoes</td>
+                <td>Vegetables</td>
+                <td>₹40</td>
+                <td>Available</td>
+              </tr>
+
+              <tr>
+                <td>Rice</td>
+                <td>Grains</td>
+                <td>₹70</td>
+                <td>Available</td>
+              </tr>
+
+              <tr>
+                <td>Apples</td>
+                <td>Fruits</td>
+                <td>₹120</td>
+                <td>Out of Stock</td>
+              </tr>
+
+            </tbody>
+
+          </table>
 
         </div>
 
