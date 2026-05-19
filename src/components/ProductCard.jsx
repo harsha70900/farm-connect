@@ -1,5 +1,5 @@
+import { FaStar } from 'react-icons/fa'
 import '../styles/productcard.css'
-import { Link } from 'react-router-dom'
 
 function ProductCard({ product }) {
   return (
@@ -12,25 +12,25 @@ function ProductCard({ product }) {
 
       <div className='product-info'>
 
-        <span className='product-category'>
-          {product.category}
-        </span>
+        <h3>{product.name}</h3>
 
-        <h2>{product.name}</h2>
+        <p className='price'>
+          ₹{product.price} / kg
+        </p>
 
-        <p>{product.description}</p>
+        <div className='rating-section'>
 
-        <div className='product-bottom'>
+          <div className='stars'>
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStar className='inactive-star' />
+          </div>
 
-          <span className='price'>
-            ₹{product.price}
-          </span>
-
-          <Link to='/product-details'>
-  <button>
-    View Details
-  </button>
-</Link>
+          <p className='rating-text'>
+            4.0 Rating (120 Reviews)
+          </p>
 
         </div>
 
