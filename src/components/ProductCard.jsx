@@ -1,20 +1,39 @@
 import { FaStar } from 'react-icons/fa'
 import '../styles/productcard.css'
+
 import { useContext } from 'react'
 import { ProductContext } from '../context/ProductContext'
 
+import { useNavigate } from 'react-router-dom'
+
 function ProductCard({ product }) {
-  const { products, setProducts } =
-  useContext(ProductContext)
+
+  const {
+    products,
+    setProducts,
+    editProduct,
+    setEditProduct,
+  } = useContext(ProductContext)
+
+  const navigate = useNavigate()
+
   const handleDelete = (id) => {
 
-  const updatedProducts =
-    products.filter(
-      (product) => product.id !== id
-    )
+    const updatedProducts =
+      products.filter(
+        (product) => product.id !== id
+      )
 
-  setProducts(updatedProducts)
-}
+    setProducts(updatedProducts)
+  }
+
+  const handleEdit = () => {
+
+    setEditProduct(product)
+
+    navigate('/add-product')
+  }
+
   return (
     <div className='product-card'>
 
@@ -44,12 +63,22 @@ function ProductCard({ product }) {
           <p className='rating-text'>
             4.0 Rating (120 Reviews)
           </p>
+
           <button
-  className='delete-btn'
-  onClick={() => handleDelete(product.id)}
->
-  Delete Product
-</button>
+            type='button'
+            className='edit-btn'
+            onClick={handleEdit}
+          >
+            Edit Product
+          </button>
+
+          <button
+            type='button'
+            className='delete-btn'
+            onClick={() => handleDelete(product.id)}
+          >
+            Delete Product
+          </button>
 
         </div>
 

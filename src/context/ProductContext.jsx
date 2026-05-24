@@ -36,6 +36,9 @@ function ProductProvider({ children }) {
       ]
 })
 
+const [editProduct, setEditProduct] =
+  useState(null)
+
 useEffect(() => {
   localStorage.setItem(
     'products',
@@ -45,7 +48,12 @@ useEffect(() => {
 
   return (
     <ProductContext.Provider
-      value={{ products, setProducts }}
+      value={{
+  products,
+  setProducts,
+  editProduct,
+  setEditProduct,
+}}
     >
       {children}
     </ProductContext.Provider>

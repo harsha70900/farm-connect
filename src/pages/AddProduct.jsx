@@ -1,30 +1,71 @@
 import Navbar from '../components/Navbar'
 import '../styles/addproduct.css'
-import { useState, useContext } from 'react'
 import { ProductContext } from '../context/ProductContext'
+import { useState, useContext, useEffect }
+from 'react'
 
 function AddProduct() {
-
-  const { products, setProducts } =
-  useContext(ProductContext)
+const {
+  products,
+  setProducts,
+  editProduct,
+  setEditProduct,
+} = useContext(ProductContext)
 
 const [name, setName] = useState('')
 const [category, setCategory] = useState('Vegetables')
 const [price, setPrice] = useState('')
 const [image, setImage] = useState('')
 
-const handleAddProduct = (e) => {
-  e.preventDefault()
+useEffect(() => {
 
-  const newProduct = {
-    id: Date.now(),
-    name,
-    category,
-    price,
-    image,
+  if (editProduct) {
+
+    setName(editProduct.name)
+    setCategory(editProduct.category)
+    setPrice(editProduct.price)
+    setImage(editProduct.image)
+
   }
 
-  setProducts([...products, newProduct])
+}, [editProduct])
+
+const handleAddProduct = (e) => {
+
+  e.preventDefault()
+
+  if (editProduct) {
+
+    const updatedProducts =
+      products.map((product) =>
+
+        product.id === editProduct.id
+          ? {
+              ...product,
+              name,
+              category,
+              price,
+              image,
+            }
+          : product
+      )
+
+    setProducts(updatedProducts)
+
+    setEditProduct(null)
+
+  } else {
+
+    const newProduct = {
+      id: Date.now(),
+      name,
+      category,
+      price,
+      image,
+    }
+
+    setProducts([...products, newProduct])
+  }
 
   setName('')
   setPrice('')

@@ -68,3 +68,20 @@
 .delete-btn:hover {
   background: #b91c1c;
 }
+
+.edit-btn {
+  width: 100%;
+  margin-top: 15px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  background: #1d4ed8;
+}
