@@ -5,6 +5,8 @@ import { useContext } from 'react'
 import { ProductContext } from '../context/ProductContext'
 
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
 
 function ProductCard({ product }) {
 
@@ -35,7 +37,13 @@ function ProductCard({ product }) {
   }
 
   return (
-    <div className='product-card'>
+    <Link
+  to={`/product/${product.id}`}
+  className='product-link'
+>
+
+<div className='product-card'>
+    
 
       <img
         src={product.image}
@@ -85,6 +93,9 @@ function ProductCard({ product }) {
       </div>
 
     </div>
+  
+
+</Link>
   )
 }
 

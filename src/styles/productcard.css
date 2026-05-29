@@ -85,3 +85,8 @@
 .edit-btn:hover {
   background: #1d4ed8;
 }
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+}

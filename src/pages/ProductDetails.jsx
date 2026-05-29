@@ -1,7 +1,28 @@
 import Navbar from '../components/Navbar'
+
 import '../styles/productdetails.css'
 
+import { useParams } from 'react-router-dom'
+
+import { useContext } from 'react'
+import { ProductContext } from '../context/ProductContext'
+
 function ProductDetails() {
+
+  const { id } = useParams()
+
+  const { products } =
+    useContext(ProductContext)
+
+  const product =
+    products.find(
+      (product) => product.id === Number(id)
+    )
+
+  if (!product) {
+    return <h1>Product Not Found</h1>
+  }
+
   return (
     <>
       <Navbar />
@@ -13,8 +34,8 @@ function ProductDetails() {
           <div className='product-image-section'>
 
             <img
-              src='https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=1200&auto=format&fit=crop'
-              alt='product'
+              src={product.image}
+              alt={product.name}
             />
 
           </div>
@@ -22,28 +43,23 @@ function ProductDetails() {
           <div className='product-info-section'>
 
             <span className='details-category'>
-              Vegetables
+              {product.category}
             </span>
 
-            <h1>Fresh Tomatoes</h1>
+            <h1>{product.name}</h1>
 
             <p className='details-price'>
-              ₹40 / kg
+              ₹{product.price} / kg
             </p>
 
             <p className='details-description'>
-              Fresh organic tomatoes directly sourced from local farmers.
-              Rich in nutrients and grown using natural farming methods.
+              Fresh agricultural product directly sourced from farmers.
             </p>
 
             <div className='details-extra'>
 
               <p>
-                <strong>Seller:</strong> Harsha Farms
-              </p>
-
-              <p>
-                <strong>Quantity:</strong> 100 kg Available
+                <strong>Seller:</strong> Farm-Connect
               </p>
 
               <p>
