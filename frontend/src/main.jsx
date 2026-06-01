@@ -1,0 +1,39 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+
+import './styles/global.css'
+
+import { BrowserRouter } from 'react-router-dom'
+
+import {
+  ProductProvider,
+} from './context/ProductContext'
+
+import {
+  AuthProvider,
+} from './context/AuthContext'
+
+ReactDOM.createRoot(
+  document.getElementById('root')
+).render(
+
+  <React.StrictMode>
+
+    <AuthProvider>
+
+  <ProductProvider>
+
+    <BrowserRouter>
+
+      <App />
+
+    </BrowserRouter>
+
+  </ProductProvider>
+
+</AuthProvider>
+
+  </React.StrictMode>
+)
