@@ -1,5 +1,12 @@
 package com.farmconnect.repository;
 
-public class UserRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.farmconnect.entity.User;
+
+public interface UserRepository
+        extends JpaRepository<User, Long> {
+	
+	User findByEmail(String email);
 
 }
