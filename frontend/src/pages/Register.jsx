@@ -1,7 +1,47 @@
+import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 import Navbar from '../components/Navbar'
 import '../styles/auth.css'
 
 function Register() {
+  const navigate = useNavigate()
+
+const [name, setName] = useState('')
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+const [role, setRole] = useState('Farmer')
+
+const handleRegister = async (e) => {
+
+  e.preventDefault()
+
+  const user = {
+    name,
+    email,
+    password,
+    role
+  }
+
+  try {
+
+    await axios.post(
+      'http://localhost:8080/register',
+      user
+    )
+
+    alert('Registration Successful')
+
+    navigate('/login')
+
+  } catch (error) {
+
+    console.error(error)
+
+    alert('Registration Failed')
+  }
+}
   return (
     <>
       <Navbar />
@@ -28,43 +68,63 @@ function Register() {
 
             <h2>Create Account</h2>
 
-            <form className='auth-form'>
+           <form
+            className='auth-form'
+            onSubmit={handleRegister}
+          >
 
               <div className='form-group'>
                 <label>Full Name</label>
 
-                <input
-                  type='text'
-                  placeholder='Enter your full name'
-                />
+                              <input
+                type='text'
+                placeholder='Enter your full name'
+                value={name}
+                onChange={(e) =>
+                  setName(e.target.value)
+                }
+              />
               </div>
 
               <div className='form-group'>
                 <label>Email</label>
 
-                <input
-                  type='email'
-                  placeholder='Enter your email'
-                />
+                            <input
+                type='email'
+                placeholder='Enter your email'
+                value={email}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
+              />
               </div>
 
               <div className='form-group'>
                 <label>Password</label>
 
-                <input
-                  type='password'
-                  placeholder='Create password'
-                />
+                            <input
+              type='password'
+              placeholder='Create password'
+              value={password}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
+            />
               </div>
 
               <div className='form-group'>
                 <label>Select Role</label>
 
-                <select>
-                  <option>Farmer</option>
-                  <option>Buyer</option>
-                  <option>Admin</option>
-                </select>
+                              <select
+                value={role}
+                onChange={(e) =>
+                  setRole(e.target.value)
+                }
+              >
+                <option>Farmer</option>
+                <option>Buyer</option>
+                <option>Admin</option>
+              </select>
               </div>
 
               <button className='auth-btn'>
