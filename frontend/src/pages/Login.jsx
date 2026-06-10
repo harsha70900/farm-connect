@@ -3,6 +3,9 @@ import '../styles/auth.css'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 
+import { useState } from 'react'
+import axios from 'axios'
+
 import {
   AuthContext,
 } from '../context/AuthContext'
@@ -19,22 +22,51 @@ import 'react-toastify/dist/ReactToastify.css'
 
 
 function Login() {
-const { login } =
+
+  const { login } =
   useContext(AuthContext)
 
-const navigate = useNavigate()
+const navigate =
+  useNavigate()
 
-const handleLogin = (e) => {
+  const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+
+const handleLogin = async (e) => {
 
   e.preventDefault()
 
-  login()
+  try {
 
-  toast.success(
-    'Login Successful 🚀'
-  )
+    const response =
+      await axios.post(
+        'http://localhost:8080/login',
+        {
+          email,
+          password,
+        }
+      )
+      console.log(response.data)
 
-  navigate('/dashboard')
+    if (response.data) {
+
+      login()
+
+      alert('Login Successful')
+
+      navigate('/dashboard')
+
+    } else {
+
+      alert('Invalid Credentials')
+    }
+
+  } catch (error) {
+
+    console.error(error)
+
+    alert('Login Failed')
+  }
 }
 
   return (
@@ -71,19 +103,27 @@ const handleLogin = (e) => {
               <div className='form-group'>
                 <label>Email</label>
 
-                <input
-                  type='email'
-                  placeholder='Enter your email'
-                />
+               <input
+              type='email'
+              placeholder='Enter your email'
+              value={email}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
+            />
               </div>
 
               <div className='form-group'>
                 <label>Password</label>
 
-                <input
-                  type='password'
-                  placeholder='Enter your password'
-                />
+                            <input
+              type='password'
+              placeholder='Enter your password'
+              value={password}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
+            />
               </div>
 
               <button className='auth-btn'>

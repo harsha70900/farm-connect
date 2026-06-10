@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.farmconnect.entity.User;
 import com.farmconnect.service.UserService;
-
+import org.springframework.http.ResponseEntity;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -27,8 +27,22 @@ public class UserController {
 	}
 	
 	@PostMapping("/register")
-	public User saveUser(@RequestBody User user) {
-		return userservice.saveUser(user);
+	public ResponseEntity<?> saveUser(
+	        @RequestBody User user) {
+
+	    try {
+
+	        User savedUser =
+	            userservice.saveUser(user);
+
+	        return ResponseEntity.ok(savedUser);
+
+	    } catch (RuntimeException e) {
+
+	        return ResponseEntity
+	                .badRequest()
+	                .body(e.getMessage());
+	    }
 	}
 	
 	@PostMapping("/login")

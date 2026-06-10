@@ -39,7 +39,7 @@ const handleRegister = async (e) => {
 
     console.error(error)
 
-    alert('Registration Failed')
+    alert(error.response?.data || 'Registration Failed')
   }
 }
   return (
