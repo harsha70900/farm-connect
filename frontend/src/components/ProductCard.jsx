@@ -66,9 +66,9 @@ function ProductCard({ product }) {
       >
 
         <img
-          src={product.image}
-          alt={product.name}
-        />
+      src={product.imageUrl}
+      alt={product.name}
+    />
 
         <div className='product-info'>
 

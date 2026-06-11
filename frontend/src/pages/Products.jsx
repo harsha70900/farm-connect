@@ -1,15 +1,38 @@
 import '../styles/products.css'
-import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
-import { useContext } from 'react'
-import { ProductContext } from '../context/ProductContext'
-
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function Products() {
-  const { products } = useContext(ProductContext)
+ const [products, setProducts] = useState([])
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
+
+  useEffect(() => {
+
+  fetchProducts()
+
+}, [])
+
+const fetchProducts = async () => {
+
+  try {
+
+    const response =
+      await axios.get(
+        'http://localhost:8080/products'
+      )
+
+    console.log(response.data)
+
+    setProducts(response.data)
+
+  } catch (error) {
+
+    console.error(error)
+  }
+}
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name

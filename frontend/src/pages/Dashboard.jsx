@@ -7,8 +7,29 @@ import {
 
 import Navbar from '../components/Navbar'
 import '../styles/dashboard.css'
+import { useContext } from 'react'
+
+import {
+  AuthContext,
+} from '../context/AuthContext'
+
+import { useNavigate }
+from 'react-router-dom'
 
 function Dashboard() {
+
+  const { logout } =
+    useContext(AuthContext)
+
+  const navigate =
+    useNavigate()
+
+  const handleLogout = () => {
+
+    logout()
+
+    navigate('/login')
+  }
   return (
     <>
       <Navbar />
@@ -21,6 +42,11 @@ function Dashboard() {
           <p>
             Monitor products, buyers, and marketplace insights.
           </p>
+          <button
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
         </div>
 
         <div className='dashboard-cards'>

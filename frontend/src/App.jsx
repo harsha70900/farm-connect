@@ -35,8 +35,12 @@ function App() {
       />
 
 <Route
-  path='/dashboard'
-  element={<Dashboard />}
+  path="/dashboard"
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  }
 />
 
       <Route
