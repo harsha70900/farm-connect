@@ -9,11 +9,7 @@ function Products() {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
 
-  useEffect(() => {
-
-  fetchProducts()
-
-}, [])
+  useEffect(() => { fetchProducts() }, [])
 
 const fetchProducts = async () => {
 
@@ -31,6 +27,34 @@ const fetchProducts = async () => {
   } catch (error) {
 
     console.error(error)
+  }
+}
+const handleDeleteProduct = async (id) => {
+
+  try {
+
+    await axios.delete(
+      `http://localhost:8080/products/${id}`
+    )
+
+    setProducts(
+      products.filter(
+        (product) =>
+          product.id !== id
+      )
+    )
+
+    alert(
+      'Product Deleted Successfully'
+    )
+
+  } catch (error) {
+
+    console.error(error)
+
+    alert(
+      'Failed to Delete Product'
+    )
   }
 }
 
@@ -91,6 +115,7 @@ const fetchProducts = async () => {
             <ProductCard
               key={product.id}
               product={product}
+              onDelete={handleDeleteProduct}
             />
           ))}
         </div>

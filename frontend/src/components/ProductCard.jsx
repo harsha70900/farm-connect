@@ -1,60 +1,51 @@
 import { FaStar } from 'react-icons/fa'
-
 import '../styles/productcard.css'
-
 import { useContext } from 'react'
-
-import { ProductContext }
-from '../context/ProductContext'
-
+import { AuthContext } from '../context/AuthContext'
 import {
   useNavigate,
   Link,
 } from 'react-router-dom'
 
-import { AuthContext }
-from '../context/AuthContext'
-
-function ProductCard({ product }) {
-
-  const {
-    products,
-    setProducts,
-    setEditProduct,
-  } = useContext(ProductContext)
+function ProductCard({
+  product,
+  onDelete,
+}) {
 
   const { isLoggedIn } =
-  useContext(AuthContext)
+    useContext(AuthContext)
 
   const navigate = useNavigate()
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
 
-  if (!isLoggedIn) {
+    if (!isLoggedIn) {
 
-    alert('Please login first')
+      alert('Please login first')
 
-    navigate('/login')
+      navigate('/login')
 
-    return
-  }
+      return
+    }
+
+    onDelete(product.id)
   }
 
   const handleEdit = () => {
 
-  if (!isLoggedIn) {
+    if (!isLoggedIn) {
 
-    alert('Please login first')
+      alert('Please login first')
 
-    navigate('/login')
+      navigate('/login')
 
-    return
+      return
+    }
+
+    alert(
+      'Edit Product feature coming next'
+    )
   }
-
-  setEditProduct(product)
-
-  navigate('/add-product')
-}
 
   return (
 
@@ -66,9 +57,12 @@ function ProductCard({ product }) {
       >
 
         <img
-      src={product.imageUrl}
-      alt={product.name}
-    />
+          src={
+            product.imageUrl ||
+            'https://via.placeholder.com/300'
+          }
+          alt={product.name}
+        />
 
         <div className='product-info'>
 
@@ -107,9 +101,7 @@ function ProductCard({ product }) {
         <button
           type='button'
           className='delete-btn'
-          onClick={() =>
-            handleDelete(product.id)
-          }
+          onClick={handleDelete}
         >
           Delete Product
         </button>
