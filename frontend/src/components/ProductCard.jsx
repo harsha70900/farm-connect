@@ -42,9 +42,11 @@ function ProductCard({
       return
     }
 
-    alert(
-      'Edit Product feature coming next'
-    )
+    navigate('/add-product', {
+      state: {
+        product
+      }
+    })
   }
 
   return (

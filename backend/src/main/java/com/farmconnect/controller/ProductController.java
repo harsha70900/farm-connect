@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.farmconnect.entity.Product;
 import com.farmconnect.service.ProductService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -39,5 +41,15 @@ public class ProductController {
 		productService.deleteProduct(id);
 		return ResponseEntity.ok("Product Deleted Successfully");
 	}
+	
+	@PutMapping("/products/{id}")
+	public Product updateProduct(
+	        @PathVariable Long id,
+	        @RequestBody Product product) {
+
+	    return productService
+	            .updateProduct(id, product);
+	}
+	
 	}
 

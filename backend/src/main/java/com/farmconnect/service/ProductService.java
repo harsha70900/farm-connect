@@ -1,5 +1,7 @@
 package com.farmconnect.service;
 import java.util.List;
+
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,28 @@ public class ProductService {
 
 	    productRepository.deleteById(id);
 
+	}
+	
+	public Product updateProduct (Long id, Product updatedProduct) {
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Product Not Found")); 
+		
+		product.setName(updatedProduct.getName());
+		product.setCategory(updatedProduct.getCategory());
+		product.setPrice(
+		        updatedProduct.getPrice());
+
+		    product.setQuantity(
+		        updatedProduct.getQuantity());
+
+		    product.setImageUrl(
+		        updatedProduct.getImageUrl());
+
+		    product.setDescription(
+		        updatedProduct.getDescription());
+
+		    return productRepository.save(product);
+		
 	}
 	
 	
