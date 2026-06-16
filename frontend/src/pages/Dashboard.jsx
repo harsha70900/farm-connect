@@ -1,22 +1,89 @@
-import {
-  FaBox,
-  FaUsers,
-  FaShoppingCart,
-  FaChartLine,
-} from 'react-icons/fa'
+import {FaBox,FaUsers,FaShoppingCart,FaChartLine,}
+ from 'react-icons/fa'
+import { useState, useEffect, useContext  } from 'react'
+import axios from 'axios'
 
 import Navbar from '../components/Navbar'
 import '../styles/dashboard.css'
-import { useContext } from 'react'
 
-import {
-  AuthContext,
+import { AuthContext,
 } from '../context/AuthContext'
-
 import { useNavigate }
 from 'react-router-dom'
 
 function Dashboard() {
+
+  const [productCount, setProductCount] =
+  useState(0)
+
+  const [products, setProducts] =
+  useState([])
+
+  const [totalQuantity, setTotalQuantity] =
+  useState(0)
+
+
+
+   useEffect(() => {
+
+  fetchProductCount()
+
+  fetchProducts()
+
+  fetchTotalQuantity()
+
+}, [])
+
+const fetchProducts = async () => {
+
+  try {
+
+    const response =
+      await axios.get(
+        'http://localhost:8080/products'
+      )
+
+    setProducts(response.data)
+
+  } catch (error) {
+
+    console.error(error)
+  }
+}
+
+const fetchProductCount = async () => {
+
+  try {
+
+    const response =
+      await axios.get(
+        'http://localhost:8080/products/count'
+      )
+
+    setProductCount(response.data)
+
+  } catch (error) {
+
+    console.error(error)
+  }
+}
+
+const fetchTotalQuantity = async () => {
+
+  try {
+
+    const response =
+      await axios.get(
+        'http://localhost:8080/products/quantity'
+      )
+
+    setTotalQuantity(response.data)
+
+  } catch (error) {
+
+    console.error(error)
+  }
+}
 
   const { logout } =
     useContext(AuthContext)
@@ -54,7 +121,7 @@ function Dashboard() {
           <div className='dashboard-card'>
             <FaBox className='dashboard-icon' />
 
-            <h2>120</h2>
+            <h2>{productCount}</h2>
 
             <p>Total Products</p>
           </div>
@@ -62,9 +129,9 @@ function Dashboard() {
           <div className='dashboard-card'>
             <FaUsers className='dashboard-icon' />
 
-            <h2>45</h2>
+            <h2>{totalQuantity}</h2>
 
-            <p>Farmers</p>
+            <p>Total Inventory</p>
           </div>
 
           <div className='dashboard-card'>
@@ -102,28 +169,27 @@ function Dashboard() {
 
             <tbody>
 
-              <tr>
-                <td>Tomatoes</td>
-                <td>Vegetables</td>
-                <td>₹40</td>
-                <td>Available</td>
-              </tr>
+                {products.map((product) => (
 
-              <tr>
-                <td>Rice</td>
-                <td>Grains</td>
-                <td>₹70</td>
-                <td>Available</td>
-              </tr>
+                  <tr key={product.id}>
 
-              <tr>
-                <td>Apples</td>
-                <td>Fruits</td>
-                <td>₹120</td>
-                <td>Out of Stock</td>
-              </tr>
+                    <td>{product.name}</td>
 
-            </tbody>
+                    <td>{product.category}</td>
+
+                    <td>₹{product.price}</td>
+
+                    <td>
+                      {product.quantity > 0
+                        ? 'Available'
+                        : 'Out of Stock'}
+                    </td>
+
+                  </tr>
+
+                ))}
+
+          </tbody>
 
           </table>
 

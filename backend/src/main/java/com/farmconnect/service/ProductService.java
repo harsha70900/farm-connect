@@ -49,6 +49,16 @@ public class ProductService {
 		    return productRepository.save(product);
 		
 	}
+
+	public long getProductCount() {
+
+	    return productRepository.count();
+	}
+
+	public long getTotalQuantity() {	
+		return productRepository.findAll().stream()
+				.mapToLong(Product::getQuantity).sum();
+	}
 	
 	
 }

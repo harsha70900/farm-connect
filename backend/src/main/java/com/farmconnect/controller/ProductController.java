@@ -51,5 +51,15 @@ public class ProductController {
 	            .updateProduct(id, product);
 	}
 	
+	@GetMapping("/products/count")
+	public long getProductCount() {
+
+	    return productService.getProductCount();
+	}
+	
+	@GetMapping("/products/quantity")
+	public long getTotalQuantity() {
+		return productService.getTotalQuantity();
+	}
 	}
 
