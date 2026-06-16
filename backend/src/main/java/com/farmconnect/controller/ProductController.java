@@ -61,5 +61,6 @@ public class ProductController {
 	public long getTotalQuantity() {
 		return productService.getTotalQuantity();
 	}
+	
 	}
 

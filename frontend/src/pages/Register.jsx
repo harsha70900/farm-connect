@@ -123,7 +123,6 @@ const handleRegister = async (e) => {
               >
                 <option>Farmer</option>
                 <option>Buyer</option>
-                <option>Admin</option>
               </select>
               </div>
 

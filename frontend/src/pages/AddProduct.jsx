@@ -72,6 +72,22 @@ function AddProduct() {
 
   }, [editProduct])
 
+  useEffect(() => {
+
+  const role =
+    localStorage.getItem('role')
+
+  if (role !== 'Farmer') {
+
+    alert(
+      'Access Denied'
+    )
+
+    navigate('/')
+  }
+
+}, [navigate])
+
   const handleAddProduct =
     async (e) => {
 

@@ -50,13 +50,17 @@ const handleLogin = async (e) => {
 
     if (response.data) {
 
-      login()
+  localStorage.setItem(
+    'role',
+    response.data.role
+  )
 
-      alert('Login Successful')
+  login()
 
-      navigate('/dashboard')
+  alert('Login Successful')
 
-    } else {
+  navigate('/dashboard')
+} else {
 
       alert('Invalid Credentials')
     }
@@ -68,6 +72,8 @@ const handleLogin = async (e) => {
     alert('Login Failed')
   }
 }
+
+
 
   return (
     <>

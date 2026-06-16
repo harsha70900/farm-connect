@@ -26,6 +26,18 @@ const handleLogout = () => {
   navigate('/login')
 }
 
+const role=localStorage.getItem('role')
+{role === 'Farmer' && (
+  <button
+    className='floating-add-btn'
+    onClick={() =>
+      navigate('/add-product')
+    }
+  >
+    +
+  </button>
+)}
+
   return (
     <nav className='navbar'>
 
@@ -71,9 +83,22 @@ const handleLogout = () => {
 
 </div>
 
+ {role === 'Farmer' && (
+          <button
+            className='floating-add-btn'
+            onClick={() => navigate('/add-product')}
+          >
+            +
+          </button>
+        )}
+
       </div>
 
     </nav>
+
+    
+
+    
   )
 }
 
