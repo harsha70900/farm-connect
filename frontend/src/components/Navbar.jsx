@@ -21,22 +21,14 @@ const navigate = useNavigate()
 
 const handleLogout = () => {
 
+  localStorage.removeItem('role')
+
   logout()
 
   navigate('/login')
 }
 
 const role=localStorage.getItem('role')
-{role === 'Farmer' && (
-  <button
-    className='floating-add-btn'
-    onClick={() =>
-      navigate('/add-product')
-    }
-  >
-    +
-  </button>
-)}
 
   return (
     <nav className='navbar'>
@@ -83,14 +75,14 @@ const role=localStorage.getItem('role')
 
 </div>
 
- {role === 'Farmer' && (
-          <button
-            className='floating-add-btn'
-            onClick={() => navigate('/add-product')}
-          >
-            +
-          </button>
-        )}
+ {isLoggedIn && role === 'Farmer' && (
+  <button
+    className='floating-add-btn'
+    onClick={() => navigate('/add-product')}
+  >
+    +
+  </button>
+)}
 
       </div>
 

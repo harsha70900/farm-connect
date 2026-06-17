@@ -6,6 +6,7 @@ import {
   useNavigate,
   Link,
 } from 'react-router-dom'
+import axios from 'axios'
 
 function ProductCard({
   product,
@@ -48,6 +49,34 @@ function ProductCard({
       }
     })
   }
+
+  const role =
+  localStorage.getItem('role')
+
+const handleBuy = async (product) => {
+  try {
+    // Convert string price ("100") to a true number so your backend Double accepts it
+    const parsedPrice = parseFloat(product.price) || 0;
+
+    const order = {
+      // Changed to snake_case to match your backend @JsonProperty names exactly
+      buyer_name: localStorage.getItem('buyerName') || 'Guest Buyer',
+      product_name: product.name,
+      price: parsedPrice,  //price: parseFloat(product.price) || 0,
+      quantity: 1,
+      total_price: parsedPrice, 
+      status: 'Pending'
+    };
+
+    await axios.post('http://localhost:8080/orders', order);
+    alert('Order Placed Successfully');
+
+  } catch (error) {
+    console.error(error);
+    alert('Failed to Place Order');
+  }
+};
+
 
   return (
 
@@ -92,6 +121,16 @@ function ProductCard({
           4.0 Rating (120 Reviews)
         </p>
 
+        {role === 'Buyer' && (
+          <button type='button'
+          className='buy-btn'
+          onClick={()=>
+            handleBuy(product)
+          } > Buy Now</button>
+          
+        )}
+
+       {role === 'Farmer' && (   
         <button
           type='button'
           className='edit-btn'
@@ -99,7 +138,9 @@ function ProductCard({
         >
           Edit Product
         </button>
+        )}
 
+        {role === 'Farmer' && (
         <button
           type='button'
           className='delete-btn'
@@ -107,6 +148,7 @@ function ProductCard({
         >
           Delete Product
         </button>
+        )}
 
       </div>
 

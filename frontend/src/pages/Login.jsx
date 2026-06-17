@@ -54,6 +54,10 @@ const handleLogin = async (e) => {
     'role',
     response.data.role
   )
+  localStorage.setItem(
+  'buyerName',
+  response.data.name
+)
 
   login()
 

@@ -90,3 +90,14 @@
   text-decoration: none;
   color: inherit;
 }
+
+.buy-btn {
+  width: 100%;
+  padding: 12px;
+  background: #1b8f3f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
