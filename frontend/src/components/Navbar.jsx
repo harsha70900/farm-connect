@@ -48,6 +48,30 @@ const role=localStorage.getItem('role')
     Products
   </Link>
 
+  {
+  role === 'Farmer' && (
+    <Link to='/add-product'>
+      Add Product
+    </Link>
+  )
+}
+
+{role === 'Farmer' && (
+
+  <Link to='/farmer-orders'>
+    Orders
+  </Link>
+
+)}
+
+{
+  role === 'Buyer' && (
+    <Link to='/my-orders'>
+      My Orders
+    </Link>
+  )
+}
+
   <Link to='/dashboard'>
     Dashboard
   </Link>

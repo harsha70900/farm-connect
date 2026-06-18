@@ -10,6 +10,9 @@ import Dashboard from './pages/Dashboard'
 import { Routes, Route } from 'react-router-dom'
 import ProtectedRoute
 from './components/ProtectedRoute'
+import MyOrders from './pages/MyOrders'
+import FarmerOrders
+from './pages/FarmerOrders'
 
 function App() {
 
@@ -53,7 +56,19 @@ function App() {
         element={<ProductDetails />}
       />
 
+      <Route
+  path='/my-orders'
+  element={<MyOrders />}
+/>
+
+  <Route
+  path="/farmer-orders"
+  element={<FarmerOrders />}
+/>
+
     </Routes>
+
+    
   )
 }
 

@@ -19,5 +19,19 @@ public class OrderService {
 	public List<Order> getAllOrders() {
 		return orderRepository.findAll();
 	}
+	
+	public Order updateOrderStatus(
+	        Long id,
+	        String status) {
+
+	    Order order =
+	        orderRepository.findById(id)
+	        .orElseThrow(() ->
+	            new RuntimeException("Order Not Found"));
+
+	    order.setStatus(status);
+
+	    return orderRepository.save(order);
+	}
 
 }
