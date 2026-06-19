@@ -14,6 +14,15 @@ import MyOrders from './pages/MyOrders'
 import FarmerOrders
 from './pages/FarmerOrders'
 
+import AdminDashboard
+from './pages/AdminDashboard'
+
+import AdminUsers 
+from './pages/AdminUsers'
+
+import AdminProducts
+from './pages/AdminProducts'
+
 function App() {
 
   return (
@@ -64,6 +73,21 @@ function App() {
   <Route
   path="/farmer-orders"
   element={<FarmerOrders />}
+/>
+
+  <Route
+  path="/admin"
+  element={<AdminDashboard />}
+/>
+
+<Route
+  path="/admin/users"
+  element={<AdminUsers />}
+/>
+
+<Route
+  path="/admin/products"
+  element={<AdminProducts />}
 />
 
     </Routes>

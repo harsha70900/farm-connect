@@ -48,22 +48,33 @@ const handleLogin = async (e) => {
       )
       console.log(response.data)
 
-    if (response.data) {
+if (response.data) {
+
+  login()
 
   localStorage.setItem(
     'role',
     response.data.role
   )
-  localStorage.setItem(
-  'buyerName',
-  response.data.name
-)
-
-  login()
 
   alert('Login Successful')
 
-  navigate('/dashboard')
+  if (
+    response.data.role === 'Admin'
+  ) {
+
+    navigate('/admin')
+
+  } else if (
+    response.data.role === 'Farmer'
+  ) {
+
+    navigate('/dashboard')
+
+  } else {
+
+    navigate('/products')
+  }
 } else {
 
       alert('Invalid Credentials')
