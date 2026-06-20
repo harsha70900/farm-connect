@@ -23,6 +23,9 @@ from './pages/AdminUsers'
 import AdminProducts
 from './pages/AdminProducts'
 
+import AdminOrders
+from './pages/AdminOrders'
+
 function App() {
 
   return (
@@ -88,6 +91,11 @@ function App() {
 <Route
   path="/admin/products"
   element={<AdminProducts />}
+/>
+
+<Route
+  path='/admin/orders'
+  element={<AdminOrders />}
 />
 
     </Routes>

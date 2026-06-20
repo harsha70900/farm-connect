@@ -85,6 +85,16 @@ const [products, setProducts] = useState([])
 
 </Link>
 
+<Link to='/admin/orders'>
+
+  <button
+    className='approve-btn'
+  >
+    Manage Orders
+  </button>
+
+</Link>
+
 </div>
 
         </div>
