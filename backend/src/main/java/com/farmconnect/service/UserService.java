@@ -2,6 +2,7 @@ package com.farmconnect.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.farmconnect.entity.User;
@@ -12,6 +13,9 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
@@ -26,6 +30,7 @@ public class UserService {
 	        );
 	    }
 
+	    user.setPassword(passwordEncoder.encode(user.getPassword()));
 	    return userRepository.save(user);
 	}
 	
@@ -45,7 +50,7 @@ public class UserService {
 		
 		User user = userRepository.findByEmail(email);
 		
-		if(user != null && user.getPassword().equals(password)){
+		if(user != null && passwordEncoder.matches(password,user.getPassword())){
 			return user;
 		}
 		return null;
@@ -57,5 +62,7 @@ public class UserService {
 	    userRepository.deleteById(id);
 
 	}
+	
+	
 	
 }
