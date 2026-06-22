@@ -90,6 +90,12 @@ const role=localStorage.getItem('role')
   </Link>
 )}
 
+{role === 'Admin' && (
+  <Link to='/admin/orders'>
+    Orders
+  </Link>
+)}
+
 
   <Link to='/dashboard'>
     Dashboard

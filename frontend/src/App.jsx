@@ -26,79 +26,71 @@ from './pages/AdminProducts'
 import AdminOrders
 from './pages/AdminOrders'
 
+import AdminRoute from './components/AdminRoute'
+
 function App() {
 
   return (
 
-    <Routes>
-
-      <Route path='/' element={<Home />} />
-
-      <Route
-        path='/products'
-        element={<Products />}
-      />
-
-      <Route
-        path='/login'
-        element={<Login />}
-      />
-
-      <Route
-        path='/register'
-        element={<Register />}
-      />
-
-<Route
-  path="/dashboard"
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  }
-/>
-
-      <Route
-        path='/add-product'
-        element={<AddProduct />}
-      />
-
-      <Route
-        path='/product/:id'
-        element={<ProductDetails />}
-      />
-
-      <Route
-  path='/my-orders'
-  element={<MyOrders />}
-/>
+   <Routes>
+  <Route path='/' element={<Home />} />
+  <Route path='/products' element={<Products />} />
+  <Route path='/login' element={<Login />} />
+  <Route path='/register' element={<Register />} />
 
   <Route
-  path="/farmer-orders"
-  element={<FarmerOrders />}
-/>
+    path="/dashboard"
+    element={
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route path='/add-product' element={<AddProduct />} />
+  <Route path='/product/:id' element={<ProductDetails />} />
+  <Route path='/my-orders' element={<MyOrders />} />
+  <Route path="/farmer-orders" element={<FarmerOrders />} />
+
+  {/* Admin Routes - Adjusted to unique sub-paths */}
+  <Route
+    path="/admin"
+    element={
+      <AdminRoute>
+        <AdminDashboard />
+      </AdminRoute>
+    }
+  />
 
   <Route
-  path="/admin"
-  element={<AdminDashboard />}
-/>
+    path="/admin/users"
+    element={
+      <AdminRoute>
+        <AdminUsers />
+      </AdminRoute>
+    }
+  />
 
-<Route
-  path="/admin/users"
-  element={<AdminUsers />}
-/>
+  <Route
+    path="/admin/products"
+    element={
+      <AdminRoute>
+        <AdminProducts />
+      </AdminRoute>
+    }
+  />
+  
+  {/* Added missing orders route mapped in your Navbar */}
+  <Route
+    path="/admin/orders"
+    element={
+      <AdminRoute>
+        <AdminOrders />
+      </AdminRoute>
+    }
+  />
+</Routes>
 
-<Route
-  path="/admin/products"
-  element={<AdminProducts />}
-/>
-
-<Route
-  path='/admin/orders'
-  element={<AdminOrders />}
-/>
-
-    </Routes>
 
     
   )
