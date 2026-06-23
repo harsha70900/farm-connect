@@ -1,9 +1,15 @@
 package com.farmconnect.entity;
 
 import jakarta.persistence.Entity;
+
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Product {
@@ -11,11 +17,27 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "Product name is required")
 	private String name;
+	
+	@NotBlank(message = "Category is required")
 	private String category;
+	
+	@NotNull(message = "Price is required")
+	@DecimalMin(
+		    value = "0.01",
+		    message = "Price must be greater than 0"
+		)
 	private Double price;
+	
+	@NotBlank(message = "Description is required")
 	private String description;
+	
+	@NotNull(message = "Quantity is required")
+	@Min(value = 1, message = "Quantity must be greater than 0")
 	private Integer quantity;
+	
+	@NotBlank(message = "Image URL is required")
 	private String imageUrl;
 	
 	public Product() {

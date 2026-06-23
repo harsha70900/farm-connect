@@ -23,11 +23,17 @@ public class JwtUtil {
             );
 
     public String generateToken(
-            String email) {
+            String email,
+            String role) {
 
         return Jwts.builder()
 
                 .subject(email)
+
+                .claim(
+                    "role",
+                    role
+                )
 
                 .issuedAt(
                     new Date()
@@ -60,6 +66,26 @@ public class JwtUtil {
                 .getPayload();
 
         return claims.getSubject();
+    }
+    
+    public String extractRole(
+            String token) {
+
+        Claims claims =
+            Jwts.parser()
+
+                .verifyWith(key)
+
+                .build()
+
+                .parseSignedClaims(token)
+
+                .getPayload();
+
+        return claims.get(
+                "role",
+                String.class
+        );
     }
 
     public boolean validateToken(

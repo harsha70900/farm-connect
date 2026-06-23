@@ -23,6 +23,15 @@ public class UserService {
 	}
 	
 	public User saveUser(User user) {
+		
+		if(user.getEmail().equals(
+			    "admin@farmconnect.com"
+			)) {
+
+			   throw new RuntimeException(
+			      "Reserved email"
+			   );
+			}
 
 	    if(userRepository.existsByEmail(user.getEmail())){
 	        throw new RuntimeException(
@@ -59,8 +68,21 @@ public class UserService {
 	
 	public void deleteUser(Long id) {
 
-	    userRepository.deleteById(id);
+	    User user = userRepository.findById(id)
+	            .orElseThrow(() ->
+	                new RuntimeException(
+	                    "User not found"
+	                ));
 
+	   // if(user.getRole().equals("Admin")) {
+	    	
+	    if("Admin".equals(user.getRole())) {
+	        throw new RuntimeException(
+	            "Admin cannot be deleted"
+	        );
+	    }
+
+	    userRepository.deleteById(id);
 	}
 	
 	

@@ -51,6 +51,11 @@ public class JwtFilter
                 String email =
                     jwtUtil.extractEmail(token);
 
+                request.setAttribute(
+                    "role",
+                    jwtUtil.extractRole(token)
+                );
+
                 UsernamePasswordAuthenticationToken auth =
 
                     new UsernamePasswordAuthenticationToken(

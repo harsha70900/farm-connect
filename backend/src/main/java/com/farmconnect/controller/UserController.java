@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.farmconnect.entity.User;
 import com.farmconnect.security.JwtUtil;
+import com.farmconnect.security.RoleUtil;
 import com.farmconnect.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -28,12 +33,23 @@ public class UserController {
 	private JwtUtil jwtUtil;
 	
 	@GetMapping("/users")
-	public List<User> getAllUsers() {
-		return userservice.getAllUsers();
+	public ResponseEntity<?> getAllUsers(
+	        HttpServletRequest request) {
+
+	    if(!RoleUtil.isAdmin(request)) {
+
+	        return ResponseEntity
+	                .status(403)
+	                .body("Access Denied");
+	    }
+
+	    return ResponseEntity.ok(
+	            userservice.getAllUsers()
+	    );
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity<?> saveUser(
+	public ResponseEntity<?> saveUser( @Valid
 	        @RequestBody User user) {
 
 	    try {
@@ -63,10 +79,11 @@ public class UserController {
 
 	    if(loggedInUser != null) {
 
-	        String token =
-	            jwtUtil.generateToken(
-	                loggedInUser.getEmail()
-	            );
+	    	String token =
+	    		    jwtUtil.generateToken(
+	    		        loggedInUser.getEmail(),
+	    		        loggedInUser.getRole()
+	    		    );
 
 	        return ResponseEntity.ok(
 	            java.util.Map.of(

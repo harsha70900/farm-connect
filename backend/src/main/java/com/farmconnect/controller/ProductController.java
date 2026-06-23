@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.farmconnect.entity.Product;
 import com.farmconnect.service.ProductService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -32,7 +35,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("/products")
-	public Product saveProduct(@RequestBody Product product) {
+	public Product saveProduct(@Valid @RequestBody Product product) {
 		return productService.saveProduct(product);
 	}
 	
@@ -45,7 +48,7 @@ public class ProductController {
 	@PutMapping("/products/{id}")
 	public Product updateProduct(
 	        @PathVariable Long id,
-	        @RequestBody Product product) {
+	        @Valid @RequestBody Product product) {
 
 	    return productService
 	            .updateProduct(id, product);

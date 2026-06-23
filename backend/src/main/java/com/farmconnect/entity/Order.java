@@ -5,6 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty; // Import Jackson annotation
 
 @Entity
@@ -15,18 +20,33 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Buyer name is required")
 	@JsonProperty("buyer_name") // Accepts buyer_name from React
 	private String buyerName;
-
+	
+	@NotBlank(message = "Product name is required")
 	@JsonProperty("product_name") // Accepts product_name from React
 	private String productName;
-
+	
+	@NotNull(message = "Price is required")
+	@DecimalMin(value = "0.01", message = "Price must be greater than 0"
+		)
 	private Double price;
+	
+	@NotNull(message = "Quantity is required")
+	@Min(value = 1, message = "Quantity must be greater than 0")
 	private Integer quantity;
-
+	
+	
+	@NotNull(message = "Total price is required")
+	@DecimalMin(
+		    value = "0.01",
+		    message = "Total price must be greater than 0"
+		)
 	@JsonProperty("total_price") // Accepts total_price from React
 	private Double totalPrice;
-
+	
+	@NotBlank(message = "Status is required")
 	private String status;
 
 	public Order() {

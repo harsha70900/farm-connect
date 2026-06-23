@@ -2,6 +2,10 @@ package com.farmconnect.entity;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -10,15 +14,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name is required")
     private String name;
-    
-    @Column(nullable = false,unique = true)
+
+    @Email(message = "Invalid email format")
+    @NotBlank(message = "Email is required")
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Size(
+        min = 6,
+        message = "Password must be at least 6 characters"
+    )
+    @NotBlank(message = "Password is required")
     private String password;
 
+    @NotBlank(message = "Role is required")
     private String role;
-
     public User() {
     }
 

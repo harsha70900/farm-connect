@@ -6,7 +6,7 @@ import {
   useNavigate,
   Link,
 } from 'react-router-dom'
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 
 function ProductCard({
   product,
@@ -68,7 +68,7 @@ const handleBuy = async (product) => {
       status: 'Pending'
     };
 
-    await axios.post('http://localhost:8080/orders', order);
+    await api.post('/orders', order);
     alert('Order Placed Successfully');
 
   } catch (error) {

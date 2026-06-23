@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.farmconnect.entity.Order;
 import com.farmconnect.service.OrderService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 public class OrderController {
@@ -24,7 +26,7 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@PostMapping("/orders")
-	public Order saveOrder(@RequestBody Order order){
+	public Order saveOrder(@Valid @RequestBody Order order){
 		return orderService.saveOrder(order);
 	}
 	

@@ -19,13 +19,25 @@ public class ProductService {
 	}
 	
 	public Product saveProduct(Product product) {
+		if(productRepository.existsByName(
+		        product.getName().trim())) {
+
+		    throw new RuntimeException(
+		        "Product already exists");
+		}
 		return productRepository.save(product);
 	}
 	
 	public void deleteProduct(Long id) {
 
-	    productRepository.deleteById(id);
+	    if(!productRepository.existsById(id)) {
 
+	        throw new RuntimeException(
+	            "Product Not Found"
+	        );
+	    }
+
+	    productRepository.deleteById(id);
 	}
 	
 	public Product updateProduct (Long id, Product updatedProduct) {

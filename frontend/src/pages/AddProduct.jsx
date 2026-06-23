@@ -88,27 +88,52 @@ function AddProduct() {
 
 }, [navigate])
 
-  const handleAddProduct =
-    async (e) => {
+const handleAddProduct = async (e) => {
 
-      e.preventDefault()
+  e.preventDefault()
 
-      const product = {
+  // Validation Starts Here
 
-        name,
+  if (
+    !name.trim() ||
+    !price ||
+    !quantity ||
+    !imageUrl.trim() ||
+    !description.trim()
+  ) {
 
-        category,
+    alert('All fields are required')
+    return
+  }
 
-        price:
-          parseFloat(price) || 0,
+  if (parseFloat(price) <= 0) {
 
-        quantity:
-          parseInt(quantity) || 0,
+    alert('Price must be greater than 0')
+    return
+  }
 
-        imageUrl,
+  if (parseInt(quantity) <= 0) {
 
-        description
-      }
+    alert('Quantity must be greater than 0')
+    return
+  }
+
+  // Validation Ends Here
+
+  const product = {
+
+    name,
+
+    category,
+
+    price: parseFloat(price),
+
+    quantity: parseInt(quantity),
+
+    imageUrl,
+
+    description
+  }
 
       try {
 

@@ -28,6 +28,9 @@ from './pages/AdminOrders'
 
 import AdminRoute from './components/AdminRoute'
 
+import BuyerRoute from './components/BuyerRoute'
+import FarmerRoute from './components/FarmerRoute'
+
 function App() {
 
   return (
@@ -41,16 +44,32 @@ function App() {
   <Route
     path="/dashboard"
     element={
-      <ProtectedRoute>
         <Dashboard />
-      </ProtectedRoute>
     }
   />
 
-  <Route path='/add-product' element={<AddProduct />} />
+  <Route 
+  path='/add-product' 
+  element={
+    <FarmerRoute>
+  <AddProduct />
+  </FarmerRoute>
+}
+/>
+
   <Route path='/product/:id' element={<ProductDetails />} />
-  <Route path='/my-orders' element={<MyOrders />} />
-  <Route path="/farmer-orders" element={<FarmerOrders />} />
+  <Route path='/my-orders' element={
+    <BuyerRoute>
+    <MyOrders />
+    </BuyerRoute>
+    } />
+
+  <Route path="/farmer-orders" element={
+   <FarmerRoute>
+   <FarmerOrders />
+  </FarmerRoute>
+  }   
+    />
 
   {/* Admin Routes - Adjusted to unique sub-paths */}
   <Route
