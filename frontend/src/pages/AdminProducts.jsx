@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar'
 import '../styles/admin.css'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 
 function AdminProducts() {
 
@@ -19,8 +19,8 @@ function AdminProducts() {
     try {
 
       const response =
-        await axios.get(
-          'http://localhost:8080/products'
+        await api.get(
+          '/products'
         )
 
       setProducts(response.data)
@@ -44,9 +44,7 @@ function AdminProducts() {
 
       try {
 
-        await axios.delete(
-          `http://localhost:8080/products/${id}`
-        )
+         await api.delete(`/products/${id}`)
 
         alert(
           'Product Deleted Successfully'

@@ -1,7 +1,7 @@
 import {FaBox,FaUsers,FaShoppingCart,FaChartLine,}
  from 'react-icons/fa'
 import { useState, useEffect, useContext  } from 'react'
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 
 import Navbar from '../components/Navbar'
 import '../styles/dashboard.css'
@@ -39,9 +39,7 @@ const fetchProducts = async () => {
   try {
 
     const response =
-      await axios.get(
-        'http://localhost:8080/products'
-      )
+      await api.get('/products')
 
     setProducts(response.data)
 
@@ -56,9 +54,7 @@ const fetchProductCount = async () => {
   try {
 
     const response =
-      await axios.get(
-        'http://localhost:8080/products/count'
-      )
+      await api.get('/products/count')
 
     setProductCount(response.data)
 
@@ -73,9 +69,7 @@ const fetchTotalQuantity = async () => {
   try {
 
     const response =
-      await axios.get(
-        'http://localhost:8080/products/quantity'
-      )
+      await api.get("/products/quantity")
 
     setTotalQuantity(response.data)
 

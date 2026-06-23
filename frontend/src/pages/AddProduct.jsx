@@ -5,7 +5,7 @@ import {
   useEffect,
 } from 'react'
 
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 
 import {
   useLocation,
@@ -114,10 +114,10 @@ function AddProduct() {
 
         if (editProduct) {
 
-          await axios.put(
-            `http://localhost:8080/products/${editProduct.id}`,
-            product
-          )
+          await api.put(
+  `/products/${editProduct.id}`,
+  product
+)
 
           alert(
             'Product Updated Successfully'
@@ -125,10 +125,10 @@ function AddProduct() {
 
         } else {
 
-          await axios.post(
-            'http://localhost:8080/products',
-            product
-          )
+          await api.post(
+  '/products',
+  product
+)
 
           alert(
             'Product Added Successfully'

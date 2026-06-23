@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 import Navbar from '../components/Navbar'
 import '../styles/farmerorders.css'
 import '../styles/orders.css'
@@ -20,9 +20,7 @@ function FarmerOrders() {
     try {
 
       const response =
-        await axios.get(
-          'http://localhost:8080/orders'
-        )
+        await api.get('/orders')
 
       setOrders(response.data)
 
@@ -37,8 +35,8 @@ function FarmerOrders() {
 
       try {
 
-        await axios.put(
-          `http://localhost:8080/orders/${id}/${status}`
+        await api.put(
+          `/orders/${id}/${status}`
         )
 
         alert(

@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar'
 import '../styles/admin.css'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 
 function AdminUsers() {
 
@@ -18,9 +18,7 @@ function AdminUsers() {
     try {
 
       const response =
-        await axios.get(
-          'http://localhost:8080/users'
-        )
+        await api.get('/users')
 
       setUsers(response.data)
 
@@ -41,9 +39,7 @@ function AdminUsers() {
 
     try {
 
-      await axios.delete(
-        `http://localhost:8080/users/${id}`
-      )
+      await api.delete(`/users/${id}`)
 
       alert(
         'User Deleted Successfully'

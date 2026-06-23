@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.farmconnect.entity.User;
+import com.farmconnect.security.JwtUtil;
 import com.farmconnect.service.UserService;
 import org.springframework.http.ResponseEntity;
 
@@ -22,6 +23,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userservice;
+	
+	@Autowired
+	private JwtUtil jwtUtil;
 	
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
@@ -48,8 +52,38 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public User loginUser(@RequestBody User user) {
-		return userservice.loginUser(user.getEmail(), user.getPassword());
+	public ResponseEntity<?> loginUser(
+	        @RequestBody User user) {
+
+	    User loggedInUser =
+	        userservice.loginUser(
+	            user.getEmail(),
+	            user.getPassword()
+	        );
+
+	    if(loggedInUser != null) {
+
+	        String token =
+	            jwtUtil.generateToken(
+	                loggedInUser.getEmail()
+	            );
+
+	        return ResponseEntity.ok(
+	            java.util.Map.of(
+	                "token", token,
+	                "role",
+	                loggedInUser.getRole(),
+	                "name",
+	                loggedInUser.getName()
+	            )
+	        );
+	    }
+
+	    return ResponseEntity
+	            .badRequest()
+	            .body(
+	              "Invalid Credentials"
+	            );
 	}
 	
 	@DeleteMapping("/user/{id}")

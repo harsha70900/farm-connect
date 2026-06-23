@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import '../styles/admin.css'
 import { Link } from 'react-router-dom'
+import api from '../api/AxiosConfig'
 
 function AdminDashboard() {
 const[users, setUsers] = useState([])
@@ -18,9 +19,9 @@ const [products, setProducts] = useState([])
   const fetchData = async () => {
 
   try {
-    const userResponse = await axios.get('http://localhost:8080/users')
-    const productResponse = await axios.get('http://localhost:8080/products')
-    const orderResponse = await axios.get('http://localhost:8080/orders')
+    const userResponse = await api.get('/users')
+    const productResponse = await api.get('/products')
+    const orderResponse = await api.get('/orders')
 
     setUsers(userResponse.data)
     setProducts(productResponse.data)

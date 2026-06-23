@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 
 import { useState } from 'react'
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 
 import {
   AuthContext,
@@ -39,13 +39,7 @@ const handleLogin = async (e) => {
   try {
 
     const response =
-      await axios.post(
-        'http://localhost:8080/login',
-        {
-          email,
-          password,
-        }
-      )
+      await api.post('/login',{ email, password})
       console.log(response.data)
 
 if (response.data) {
@@ -56,6 +50,11 @@ if (response.data) {
     'role',
     response.data.role
   )
+
+  localStorage.setItem(
+  'token',
+  response.data.token
+)
 
   alert('Login Successful')
 

@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from '../api/AxiosConfig'
 import { useEffect, useState } from "react";
 import Navbar from '../components/Navbar'
 import FarmerOrders from "./FarmerOrders";
@@ -12,8 +12,7 @@ function MyOrders() {
 
     const fetchOrders = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/orders')
-        console.log(orders)
+        const response = await api.get('/orders')
         setOrders(response.data)
         
     } catch (error) {

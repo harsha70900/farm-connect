@@ -2,7 +2,7 @@ import '../styles/products.css'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 
 function Products() {
  const [products, setProducts] = useState([])
@@ -16,9 +16,7 @@ const fetchProducts = async () => {
   try {
 
     const response =
-      await axios.get(
-        'http://localhost:8080/products'
-      )
+      await api.get('/products')
 
     console.log(response.data)
 
@@ -33,9 +31,9 @@ const handleDeleteProduct = async (id) => {
 
   try {
 
-    await axios.delete(
-      `http://localhost:8080/products/${id}`
-    )
+   await api.delete(
+  `/products/${id}`
+)
 
     setProducts(
       products.filter(

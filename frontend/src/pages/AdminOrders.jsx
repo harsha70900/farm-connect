@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar'
 import '../styles/admin.css'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 
 function AdminOrders() {
 
@@ -19,9 +19,7 @@ function AdminOrders() {
     try {
 
       const response =
-        await axios.get(
-          'http://localhost:8080/orders'
-        )
+        await api.get('/orders')
 
       setOrders(response.data)
 
@@ -44,8 +42,8 @@ function AdminOrders() {
 
       try {
 
-        await axios.delete(
-          `http://localhost:8080/orders/${id}`
+        await api.delete(
+          `/orders/${id}`
         )
 
         alert(
