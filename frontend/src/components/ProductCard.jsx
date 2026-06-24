@@ -59,14 +59,14 @@ const handleBuy = async (product) => {
     const parsedPrice = parseFloat(product.price) || 0;
 
     const order = {
-      // Changed to snake_case to match your backend @JsonProperty names exactly
-      buyer_name: localStorage.getItem('buyerName') || 'Guest Buyer',
-      product_name: product.name,
-      price: parsedPrice,  //price: parseFloat(product.price) || 0,
-      quantity: 1,
-      total_price: parsedPrice, 
-      status: 'Pending'
-    };
+  buyer_name: localStorage.getItem('name'),
+  buyer_email: localStorage.getItem('email'),
+  product_name: product.name,
+  price: parsedPrice,
+  quantity: 1,
+  total_price: parsedPrice,
+  status: 'Pending'
+}
 
     await api.post('/orders', order);
     alert('Order Placed Successfully');

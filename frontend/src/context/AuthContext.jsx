@@ -1,7 +1,6 @@
 import {
   createContext,
   useState,
-  useEffect,
 } from 'react'
 
 export const AuthContext =
@@ -11,38 +10,36 @@ export const AuthProvider =
   ({ children }) => {
 
     const [isLoggedIn, setIsLoggedIn] =
-      useState(false)
-
-    useEffect(() => {
-
-      const token =
-        localStorage.getItem('token')
-
-      if (token) {
-        setIsLoggedIn(true)
-      }
-
-    }, [])
-
-    const login = () => {
-
-      localStorage.setItem(
-        'token',
-        'farmconnecttoken123'
+      useState(
+        !!localStorage.getItem('token')
       )
 
+//       useEffect(() => {
+
+//   const token =
+//     localStorage.getItem('token')
+
+//   if (token) {
+//     setIsLoggedIn(true)
+//   }
+
+// }, [])
+
+    const login = () => {
       setIsLoggedIn(true)
     }
 
     const logout = () => {
 
       localStorage.removeItem('token')
+      localStorage.removeItem('role')
+      localStorage.removeItem('name')
+      localStorage.removeItem('email')
 
       setIsLoggedIn(false)
     }
 
     return (
-
       <AuthContext.Provider
         value={{
           isLoggedIn,
@@ -50,9 +47,7 @@ export const AuthProvider =
           logout,
         }}
       >
-
         {children}
-
       </AuthContext.Provider>
     )
 }

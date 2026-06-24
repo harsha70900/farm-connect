@@ -1,6 +1,5 @@
 import Navbar from '../components/Navbar'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import '../styles/admin.css'
 import { Link } from 'react-router-dom'
 import api from '../api/AxiosConfig'

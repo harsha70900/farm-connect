@@ -56,6 +56,15 @@ if (response.data) {
   response.data.token
 )
 
+localStorage.setItem(
+  'name',
+  response.data.name
+)
+localStorage.setItem(
+  'email',
+  email
+)
+
   alert('Login Successful')
 
   if (

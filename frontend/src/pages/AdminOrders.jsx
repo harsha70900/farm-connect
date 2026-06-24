@@ -21,6 +21,7 @@ function AdminOrders() {
       const response =
         await api.get('/orders')
 
+      console.log(response.data)
       setOrders(response.data)
 
     } catch (error) {
@@ -108,11 +109,11 @@ function AdminOrders() {
                 <td>{order.id}</td>
 
                 <td>
-                  {order.buyerName}
+                  {order.buyer_name}
                 </td>
 
                 <td>
-                  {order.productName}
+                  {order.product_name}
                 </td>
 
                 <td>

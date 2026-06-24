@@ -37,7 +37,8 @@ public class JwtFilter
         String authHeader =
                 request.getHeader(
                         "Authorization");
-
+        
+        
         if(authHeader != null
                 &&
            authHeader.startsWith(

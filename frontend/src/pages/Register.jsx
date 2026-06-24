@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
+import api from '../api/AxiosConfig'
 import { useNavigate } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
@@ -26,10 +26,7 @@ const handleRegister = async (e) => {
 
   try {
 
-    await axios.post(
-      'http://localhost:8080/register',
-      user
-    )
+    await api.post('/register', user)
 
     alert('Registration Successful')
 

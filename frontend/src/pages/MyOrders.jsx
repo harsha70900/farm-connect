@@ -1,7 +1,6 @@
 import api from '../api/AxiosConfig'
 import { useEffect, useState } from "react";
 import Navbar from '../components/Navbar'
-import FarmerOrders from "./FarmerOrders";
 import '../styles/orders.css'
 
 function MyOrders() {
@@ -10,15 +9,42 @@ function MyOrders() {
         fetchOrders()
     },[])
 
-    const fetchOrders = async () => {
-    try {
-        const response = await api.get('/orders')
-        setOrders(response.data)
-        
-    } catch (error) {
-        console.error(error)
-    }
-    }
+   const fetchOrders = async () => {
+  try {
+
+    const response = await api.get('/orders')
+
+    const buyerName =
+      localStorage.getItem('name')
+
+    console.log(
+      "Logged User =",
+      buyerName
+    )
+
+    console.log(
+      "Orders =",
+      response.data
+    )
+const buyerEmail =
+  localStorage.getItem('email')
+
+const myOrders = response.data.filter(
+  order =>
+    order.buyer_email === buyerEmail
+)
+
+    console.log(
+      "Filtered Orders =",
+      myOrders
+    )
+
+    setOrders(myOrders)
+
+  } catch (error) {
+    console.error(error)
+  }
+}
 
     return (
         <>

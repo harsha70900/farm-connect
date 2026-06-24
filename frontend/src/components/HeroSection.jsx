@@ -1,8 +1,15 @@
 import '../styles/hero.css'
+import { useNavigate } from 'react-router-dom'
+
 
 function HeroSection() {
+
+  const navigate = useNavigate()
+
   return (
     <section className='hero'>
+
+      
 
       <div className='container hero-container'>
 
@@ -19,9 +26,9 @@ function HeroSection() {
             and local farming communities.
           </p>
 
-          <button>
-            Explore Products
-          </button>
+          <button onClick={() => navigate('/products')}>
+  Explore Products
+</button>
 
         </div>
 

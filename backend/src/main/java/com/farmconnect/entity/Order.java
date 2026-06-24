@@ -48,20 +48,32 @@ public class Order {
 	
 	@NotBlank(message = "Status is required")
 	private String status;
+	
+	@NotBlank(message = "Buyer email is required")
+	@JsonProperty("buyer_email")
+	private String buyerEmail;
 
 	public Order() {
 		super();
 	}
 
-	public Order(Long id, String buyerName, String productName, Double price, Integer quantity, Double totalPrice, String status) {
-		super();
-		this.id = id;
-		this.buyerName = buyerName;
-		this.productName = productName;
-		this.price = price;
-		this.quantity = quantity;
-		this.totalPrice = totalPrice;
-		this.status = status;
+	public Order(Long id,
+	        String buyerName,
+	        String buyerEmail,
+	        String productName,
+	        Double price,
+	        Integer quantity,
+	        Double totalPrice,
+	        String status) {
+
+	    this.id = id;
+	    this.buyerName = buyerName;
+	    this.buyerEmail = buyerEmail;
+	    this.productName = productName;
+	    this.price = price;
+	    this.quantity = quantity;
+	    this.totalPrice = totalPrice;
+	    this.status = status;
 	}
 
 	public Long getId() { return id; }
@@ -78,10 +90,24 @@ public class Order {
 	public void setTotalPrice(Double totalPrice) { this.totalPrice = totalPrice; }
 	public String getStatus() { return status; }
 	public void setStatus(String status) { this.status = status; }
+	public String getBuyerEmail() {
+	    return buyerEmail;
+	}
 
+	public void setBuyerEmail(String buyerEmail) {
+	    this.buyerEmail = buyerEmail;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", buyerName=" + buyerName + ", productName=" + productName + ", price=" + price
-				+ ", quantity=" + quantity + ", totalPrice=" + totalPrice + ", status=" + status + "]";
-	}
-}
+	    return "Order [id=" + id
+	            + ", buyerName=" + buyerName
+	            + ", buyerEmail=" + buyerEmail
+	            + ", productName=" + productName
+	            + ", price=" + price
+	            + ", quantity=" + quantity
+	            + ", totalPrice=" + totalPrice
+	            + ", status=" + status + "]";
+	}}
+

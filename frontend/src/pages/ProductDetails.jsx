@@ -1,27 +1,49 @@
 import Navbar from '../components/Navbar'
 
+import { useEffect, useState } from 'react'
+import api from '../api/AxiosConfig'
+
 import '../styles/productdetails.css'
 
 import { useParams } from 'react-router-dom'
-
-import { useContext } from 'react'
-import { ProductContext } from '../context/ProductContext'
 
 function ProductDetails() {
 
   const { id } = useParams()
 
-  const { products } =
-    useContext(ProductContext)
+  const [product, setProduct] = useState(null)
 
-  const product =
-    products.find(
-      (product) => product.id === Number(id)
-    )
+useEffect(() => {
+  fetchProduct()
+}, [])
 
-  if (!product) {
-    return <h1>Product Not Found</h1>
+const fetchProduct = async () => {
+  try {
+
+    const response =
+      await api.get('/products')
+
+    const foundProduct =
+      response.data.find(
+        p => p.id === Number(id)
+      )
+
+    setProduct(foundProduct)
+
+  } catch (error) {
+
+    console.error(error)
   }
+}
+
+if (!product) {
+  return (
+    <>
+      <Navbar />
+      <h1>Product Not Found</h1>
+    </>
+  )
+}
 
   return (
     <>
@@ -34,7 +56,7 @@ function ProductDetails() {
           <div className='product-image-section'>
 
             <img
-              src={product.image}
+              src={product.imageUrl}
               alt={product.name}
             />
 

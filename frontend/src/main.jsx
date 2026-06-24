@@ -7,9 +7,6 @@ import './styles/global.css'
 
 import { BrowserRouter } from 'react-router-dom'
 
-import {
-  ProductProvider,
-} from './context/ProductContext'
 
 import {
   AuthProvider,
@@ -23,15 +20,11 @@ ReactDOM.createRoot(
 
     <AuthProvider>
 
-  <ProductProvider>
-
     <BrowserRouter>
 
       <App />
 
     </BrowserRouter>
-
-  </ProductProvider>
 
 </AuthProvider>
 

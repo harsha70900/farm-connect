@@ -85,15 +85,14 @@ public class UserController {
 	    		        loggedInUser.getRole()
 	    		    );
 
-	        return ResponseEntity.ok(
-	            java.util.Map.of(
-	                "token", token,
-	                "role",
-	                loggedInUser.getRole(),
-	                "name",
-	                loggedInUser.getName()
-	            )
-	        );
+	    	return ResponseEntity.ok(
+	    		    java.util.Map.of(
+	    		        "token", token,
+	    		        "role", loggedInUser.getRole(),
+	    		        "name", loggedInUser.getName(),
+	    		        "email", loggedInUser.getEmail()
+	    		    )
+	    		);
 	    }
 
 	    return ResponseEntity
@@ -103,7 +102,7 @@ public class UserController {
 	            );
 	}
 	
-	@DeleteMapping("/user/{id}")
+	@DeleteMapping("/users/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable Long id) {
 		userservice.deleteUser(id);
 		return ResponseEntity.ok("User Deleted Successfully");

@@ -1,15 +1,11 @@
 import {FaBox,FaUsers,FaShoppingCart,FaChartLine,}
  from 'react-icons/fa'
-import { useState, useEffect, useContext  } from 'react'
+ import { useState, useEffect, useContext } from 'react'
 import api from '../api/AxiosConfig'
 
 import Navbar from '../components/Navbar'
 import '../styles/dashboard.css'
 
-import { AuthContext,
-} from '../context/AuthContext'
-import { useNavigate }
-from 'react-router-dom'
 
 function Dashboard() {
 
@@ -79,18 +75,6 @@ const fetchTotalQuantity = async () => {
   }
 }
 
-  const { logout } =
-    useContext(AuthContext)
-
-  const navigate =
-    useNavigate()
-
-  const handleLogout = () => {
-
-    logout()
-
-    navigate('/login')
-  }
   return (
     <>
       <Navbar />
@@ -103,11 +87,6 @@ const fetchTotalQuantity = async () => {
           <p>
             Monitor products, buyers, and marketplace insights.
           </p>
-          <button
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
         </div>
 
         <div className='dashboard-cards'>
