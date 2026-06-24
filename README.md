@@ -69,7 +69,32 @@ Farm-Connect
 
 ## 📸 Screenshots
 
-Add screenshots inside the screenshots folder.
+### Home Page
+![Home](screenshots/home-page.png)
+
+### Products Page
+![Products](screenshots/products-page.png)
+
+### Login Page
+![Login](screenshots/login-page.png)
+
+### Register Page
+![Register](screenshots/register-page.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard-page.png)
+
+### Add Product
+![Add Product](screenshots/add-product-page.png)
+
+### Farmer Orders
+![Farmer Orders](screenshots/farmer-orders-page.png)
+
+### My Orders
+![My Orders](screenshots/my-orders-page.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin-dashboard-page.png)
 
 ## 👨‍💻 Author
 
