@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 public class ProductController {
 	@Autowired
 	private ProductService productService;
