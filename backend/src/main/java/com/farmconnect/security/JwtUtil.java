@@ -1,6 +1,5 @@
 package com.farmconnect.security;
 
-import java.security.Key;
 import java.util.Date;
 
 import javax.crypto.SecretKey;
@@ -8,19 +7,24 @@ import javax.crypto.SecretKey;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 
 @Component
 public class JwtUtil {
+	
+	@Value("${jwt.secret}")
+	private String secret;
 
-    private static final String SECRET =
-            "farmconnectsecretkeyfarmconnectsecretkey12345";
+	private SecretKey key;
+	
+	 @PostConstruct
+	    public void init() {
+	        key = Keys.hmacShaKeyFor(secret.getBytes());
+	    }
 
-    private final SecretKey key =
-            Keys.hmacShaKeyFor(
-                SECRET.getBytes()
-            );
 
     public String generateToken(
             String email,
