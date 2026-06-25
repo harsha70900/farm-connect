@@ -5,67 +5,94 @@ import { useState, useEffect } from 'react'
 import api from '../api/AxiosConfig'
 
 function Products() {
- const [products, setProducts] = useState([])
+
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
 
-  useEffect(() => { fetchProducts() }, [])
+  useEffect(() => {
+    fetchProducts()
+  }, [])
 
-const fetchProducts = async () => {
+  const fetchProducts = async () => {
 
-  try {
+    try {
 
-    const response =
-      await api.get('/products')
+      const response = await api.get('/products')
 
-    console.log(response.data)
+      setProducts(response.data)
 
-    setProducts(response.data)
+    } catch (error) {
 
-  } catch (error) {
+      console.error(error)
 
-    console.error(error)
+    } finally {
+
+      setLoading(false)
+
+    }
   }
-}
-const handleDeleteProduct = async (id) => {
 
-  try {
+  const handleDeleteProduct = async (id) => {
 
-   await api.delete(
-  `/products/${id}`
-)
+    try {
 
-    setProducts(
-      products.filter(
-        (product) =>
-          product.id !== id
+      await api.delete(`/products/${id}`)
+
+      setProducts(
+        products.filter(
+          (product) => product.id !== id
+        )
       )
-    )
 
-    alert(
-      'Product Deleted Successfully'
-    )
+      alert('Product Deleted Successfully')
 
-  } catch (error) {
+    } catch (error) {
 
-    console.error(error)
+      console.error(error)
 
-    alert(
-      'Failed to Delete Product'
-    )
+      alert('Failed to Delete Product')
+    }
   }
-}
 
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name
-      .toLowerCase()
-      .includes(search.toLowerCase())
+
+    const matchesSearch =
+      product.name
+        .toLowerCase()
+        .includes(search.toLowerCase())
 
     const matchesCategory =
-      category === 'All' || product.category === category
+      category === 'All' ||
+      product.category === category
 
     return matchesSearch && matchesCategory
+
   })
+
+  if (loading) {
+
+    return (
+      <>
+        <Navbar />
+
+        <div className="products-page container">
+
+          <h2
+            style={{
+              textAlign: "center",
+              marginTop: "120px"
+            }}
+          >
+            Loading products...
+          </h2>
+
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -83,7 +110,9 @@ const handleDeleteProduct = async (id) => {
             type='text'
             placeholder='Search products...'
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) =>
+              setSearch(e.target.value)
+            }
           />
 
           <div className='filter-buttons'>
@@ -109,16 +138,23 @@ const handleDeleteProduct = async (id) => {
         </div>
 
         <div className='products-grid'>
-          {filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onDelete={handleDeleteProduct}
-            />
-          ))}
+
+          {
+            filteredProducts.map((product) => (
+
+              <ProductCard
+                key={product.id}
+                product={product}
+                onDelete={handleDeleteProduct}
+              />
+
+            ))
+          }
+
         </div>
 
       </div>
+
     </>
   )
 }
