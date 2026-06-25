@@ -18,22 +18,32 @@ function Products() {
 
   const fetchProducts = async () => {
 
-    try {
+  try {
 
-      const response = await api.get('/products')
+    console.log("Base URL:", api.defaults.baseURL);
 
-      setProducts(response.data)
+    const response = await api.get("/products");
 
-    } catch (error) {
+    console.log("Response:", response);
 
-      console.error(error)
+    console.log("Products:", response.data);
 
-    } finally {
+    setProducts(response.data);
 
-      setLoading(false)
+  } catch (error) {
 
-    }
+    console.log("ERROR:", error);
+
+    console.log("STATUS:", error.response?.status);
+
+    console.log("DATA:", error.response?.data);
+
+  } finally {
+
+    setLoading(false);
+
   }
+}
 
   const handleDeleteProduct = async (id) => {
 
