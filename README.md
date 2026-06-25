@@ -1,6 +1,19 @@
 # 🌱 Farm-Connect
 
-Farm-Connect is a Full Stack Agricultural Marketplace Platform that connects farmers and buyers directly through a secure digital marketplace.
+Full Stack Agricultural Marketplace Platform built with React, Spring Boot, MySQL, JWT Authentication and Role-Based Access Control.
+
+## ⭐ Key Highlights
+
+* Full Stack Agricultural Marketplace Platform
+* Secure JWT Authentication & Authorization
+* Role-Based Access Control (Admin, Farmer & Buyer)
+* RESTful API Integration
+* Product Management System
+* Order Management Workflow
+* Responsive User Interface
+* MySQL Database Integration
+
+---
 
 ## 🚀 Features
 
@@ -29,19 +42,33 @@ Farm-Connect is a Full Stack Agricultural Marketplace Platform that connects far
 ## 🛠️ Tech Stack
 
 ### Frontend
-- React.js
-- React Router
-- Axios
-- CSS3
+
+* React.js
+* React Router DOM
+* Axios
+* HTML5
+* CSS3
+* JavaScript (ES6)
 
 ### Backend
-- Spring Boot
-- Spring Security
-- JWT Authentication
-- REST APIs
+
+* Java 21
+* Spring Boot
+* Spring Security
+* JWT Authentication
+* REST APIs
 
 ### Database
-- MySQL
+
+* MySQL
+
+### Tools
+
+* Git
+* GitHub
+* VS Code
+* Eclipse
+* Postman
 
 ## 🔐 Security
 
@@ -98,4 +125,9 @@ Farm-Connect
 
 ## 👨‍💻 Author
 
-Harshavardhan S V
+**Harshavardhan S V**
+
+* Java Full Stack Developer
+* React.js | Spring Boot | MySQL
+* GitHub: https://github.com/harsha70900
+* LinkedIn: https://www.linkedin.com/in/harshavardhansv/
