@@ -22,7 +22,6 @@ import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class UserController {
 	
