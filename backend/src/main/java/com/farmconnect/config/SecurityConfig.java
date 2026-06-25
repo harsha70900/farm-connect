@@ -30,8 +30,12 @@ public class SecurityConfig {
         CorsConfiguration configuration =
                 new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
-                List.of("http://localhost:5173"));
+        configuration.setAllowedOriginPatterns(
+                    List.of(
+                        "http://localhost:5173",
+                        "https://*.onrender.com"
+                    )
+                );
 
         configuration.setAllowedMethods(
                 List.of("GET",
@@ -68,13 +72,11 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
 
             		.requestMatchers(
-            			    "/login",
-            			    "/register",
-            			    "/products",
-            			    "/products/count",
-            			    "/products/quantity"
-            			)
-            			.permitAll()
+                            "/api/login",
+                            "/api/register",
+                            "/api/products/**"
+                        )
+                        .permitAll()
 
                 .anyRequest()
 
