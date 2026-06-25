@@ -71,14 +71,15 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth -> auth
 
-            		.requestMatchers(
-            			    "/login",
-            			    "/register",
-            			    "/products",
-            			    "/products/count",
-            			    "/products/quantity"
-            			)
+            		.authorizeHttpRequests(auth -> auth
 
+                        .requestMatchers(
+                            "/login",
+                            "/register",
+                            "/products",
+                            "/products/count",
+                            "/products/quantity"
+                        ).permitAll()
                 .anyRequest()
 
                 .authenticated()
