@@ -1,49 +1,76 @@
 import Navbar from '../components/Navbar'
-
-import { useEffect, useState } from 'react'
-import api from '../api/AxiosConfig'
-
 import '../styles/productdetails.css'
 
 import { useParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+
+import api from '../api/AxiosConfig'
 
 function ProductDetails() {
 
   const { id } = useParams()
 
-  const [product, setProduct] = useState(null)
+  const {
+    data: product,
+    isLoading
+  } = useQuery({
 
-useEffect(() => {
-  fetchProduct()
-}, [])
+    queryKey: ['product', id],
 
-const fetchProduct = async () => {
-  try {
+    queryFn: async () => {
 
-    const response =
-      await api.get('/products')
+      const response = await api.get('/products')
 
-    const foundProduct =
-      response.data.find(
+      const foundProduct = response.data.find(
         p => p.id === Number(id)
       )
 
-    setProduct(foundProduct)
+      return foundProduct
+    }
 
-  } catch (error) {
+  })
 
-    console.error(error)
+  if (isLoading) {
+
+    return (
+      <>
+        <Navbar />
+
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "150px",
+            fontSize: "24px",
+            fontWeight: "600"
+          }}
+        >
+          Loading Product...
+        </div>
+
+      </>
+    )
   }
-}
 
-if (!product) {
-  return (
-    <>
-      <Navbar />
-      <h1>Product Not Found</h1>
-    </>
-  )
-}
+  if (!product) {
+
+    return (
+      <>
+        <Navbar />
+
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "150px",
+            fontSize: "28px",
+            fontWeight: "600"
+          }}
+        >
+          Product Not Found
+        </div>
+
+      </>
+    )
+  }
 
   return (
     <>
@@ -99,6 +126,7 @@ if (!product) {
         </div>
 
       </div>
+
     </>
   )
 }
