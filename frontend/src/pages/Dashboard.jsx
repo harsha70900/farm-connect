@@ -1,79 +1,65 @@
-import {FaBox,FaUsers,FaShoppingCart,FaChartLine,}
- from 'react-icons/fa'
- import { useState, useEffect, useContext } from 'react'
-import api from '../api/AxiosConfig'
+import {
+  FaBox,
+  FaUsers,
+  FaShoppingCart,
+  FaChartLine,
+} from 'react-icons/fa'
 
 import Navbar from '../components/Navbar'
 import '../styles/dashboard.css'
 
+import api from '../api/AxiosConfig'
+
+import { useQuery } from '@tanstack/react-query'
 
 function Dashboard() {
 
-  const [productCount, setProductCount] =
-  useState(0)
+  const {
+    data: products = [],
+    isLoading
+  } = useQuery({
 
-  const [products, setProducts] =
-  useState([])
+    queryKey: ['products'],
 
-  const [totalQuantity, setTotalQuantity] =
-  useState(0)
+    queryFn: async () => {
 
+      const response =
+        await api.get('/products')
 
+      return response.data
+    }
 
-   useEffect(() => {
+  })
 
-  fetchProductCount()
+  const productCount = products.length
 
-  fetchProducts()
+  const totalQuantity =
+    products.reduce(
+      (sum, product) =>
+        sum + product.quantity,
+      0
+    )
 
-  fetchTotalQuantity()
+  if (isLoading) {
 
-}, [])
+    return (
+      <>
+        <Navbar />
 
-const fetchProducts = async () => {
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "150px",
+            fontSize: "24px",
+            fontWeight: "600"
+          }}
+        >
+          Loading Dashboard...
+        </div>
 
-  try {
-
-    const response =
-      await api.get('/products')
-
-    setProducts(response.data)
-
-  } catch (error) {
-
-    console.error(error)
+      </>
+    )
   }
-}
-
-const fetchProductCount = async () => {
-
-  try {
-
-    const response =
-      await api.get('/products/count')
-
-    setProductCount(response.data)
-
-  } catch (error) {
-
-    console.error(error)
-  }
-}
-
-const fetchTotalQuantity = async () => {
-
-  try {
-
-    const response =
-      await api.get("/products/quantity")
-
-    setTotalQuantity(response.data)
-
-  } catch (error) {
-
-    console.error(error)
-  }
-}
 
   return (
     <>
@@ -132,43 +118,52 @@ const fetchTotalQuantity = async () => {
           <table className='dashboard-table'>
 
             <thead>
+
               <tr>
+
                 <th>Product</th>
                 <th>Category</th>
                 <th>Price</th>
                 <th>Status</th>
+
               </tr>
+
             </thead>
 
             <tbody>
 
-                {products.map((product) => (
+              {products.map((product) => (
 
-                  <tr key={product.id}>
+                <tr key={product.id}>
 
-                    <td>{product.name}</td>
+                  <td>{product.name}</td>
 
-                    <td>{product.category}</td>
+                  <td>{product.category}</td>
 
-                    <td>₹{product.price}</td>
+                  <td>₹{product.price}</td>
 
-                    <td>
-                      {product.quantity > 0
-                        ? 'Available'
-                        : 'Out of Stock'}
-                    </td>
+                  <td>
 
-                  </tr>
+                    {
+                      product.quantity > 0
+                        ? "Available"
+                        : "Out of Stock"
+                    }
 
-                ))}
+                  </td>
 
-          </tbody>
+                </tr>
+
+              ))}
+
+            </tbody>
 
           </table>
 
         </div>
 
       </div>
+
     </>
   )
 }
