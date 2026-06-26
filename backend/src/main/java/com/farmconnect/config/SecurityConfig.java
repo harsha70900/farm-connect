@@ -30,12 +30,12 @@ public class SecurityConfig {
         CorsConfiguration configuration =
                 new CorsConfiguration();
 
-        configuration.setAllowedOriginPatterns(
-                    List.of(
-                        "http://localhost:5173",
-                        "https://*.onrender.com"
-                    )
-                );
+        configuration.setAllowedOrigins(
+    List.of(
+        "http://localhost:5173",
+        "https://farm-connect-frontend.onrender.com"
+    )
+);
 
         configuration.setAllowedMethods(
                 List.of("GET",
