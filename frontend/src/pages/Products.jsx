@@ -1,71 +1,50 @@
 import '../styles/products.css'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import api from '../api/AxiosConfig'
+
+import {
+  useQuery,
+  useMutation,
+  useQueryClient
+} from '@tanstack/react-query'
 
 function Products() {
 
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
+  const queryClient = useQueryClient()
 
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
 
-  useEffect(() => {
-    fetchProducts()
-  }, [])
+  const {
+    data: products = [],
+    isLoading
+  } = useQuery({
+    queryKey: ['products'],
+    queryFn: async () => {
+      const response = await api.get('/products')
+      return response.data
+    }
+  })
 
-  const fetchProducts = async () => {
+  const deleteMutation = useMutation({
+    mutationFn: (id) => api.delete(`/products/${id}`),
 
-  try {
+    onSuccess: () => {
 
-    console.log("Base URL:", api.defaults.baseURL);
-
-    const response = await api.get("/products");
-
-    console.log("Response:", response);
-
-    console.log("Products:", response.data);
-
-    setProducts(response.data);
-
-  } catch (error) {
-
-    console.log("ERROR:", error);
-
-    console.log("STATUS:", error.response?.status);
-
-    console.log("DATA:", error.response?.data);
-
-  } finally {
-
-    setLoading(false);
-
-  }
-}
-
-  const handleDeleteProduct = async (id) => {
-
-    try {
-
-      await api.delete(`/products/${id}`)
-
-      setProducts(
-        products.filter(
-          (product) => product.id !== id
-        )
-      )
+      queryClient.invalidateQueries({
+        queryKey: ['products']
+      })
 
       alert('Product Deleted Successfully')
+    },
 
-    } catch (error) {
-
-      console.error(error)
+    onError: () => {
 
       alert('Failed to Delete Product')
     }
-  }
+  })
 
   const filteredProducts = products.filter((product) => {
 
@@ -82,7 +61,7 @@ function Products() {
 
   })
 
-  if (loading) {
+  if (isLoading) {
 
     return (
       <>
@@ -149,17 +128,15 @@ function Products() {
 
         <div className='products-grid'>
 
-          {
-            filteredProducts.map((product) => (
+          {filteredProducts.map((product) => (
 
-              <ProductCard
-                key={product.id}
-                product={product}
-                onDelete={handleDeleteProduct}
-              />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onDelete={() => deleteMutation.mutate(product.id)}
+            />
 
-            ))
-          }
+          ))}
 
         </div>
 
