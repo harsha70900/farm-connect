@@ -34,6 +34,7 @@ public class SecurityConfig {
     List.of(
         "http://localhost:5173",
         "https://farm-connect-frontend.onrender.com"
+        "https://farm-connect-production.up.railway.app"
     )
 );
 
