@@ -33,7 +33,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(
     List.of(
         "http://localhost:5173",
-        "https://farm-connect-frontend.onrender.com"
+        "https://farm-connect-frontend.onrender.com",
         "https://farm-connect-production.up.railway.app"
     )
 );
